@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            margin: 0; padding: 20px; 
+            font-family: 'Segoe UI', sans-serif;
+            /* هنا ستضع رابط صورتك الأصلية كخلفية */
+            background: url('YOUR_IMAGE_LINK_HERE') no-repeat center center fixed; 
+            background-size: cover; 
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .card { 
+            width: 100%; max-width: 600px;
+            /* تم إزالة الخلفية الملونة لتكون شفافة */
+            background: transparent; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px; padding: 20px; margin: 10px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; color: white;
+            transition: 0.3s;
+        }
+
+        .card:active { transform: scale(0.98); border-color: #d4af37; }
+
+        .text-part { flex: 2; text-align: right; font-size: 1.1rem; text-shadow: 1px 1px 2px black; }
+        
+        .count-part { 
+            flex: 1; text-align: center; font-size: 1.8rem; 
+            color: #d4af37; font-weight: bold; text-shadow: 1px 1px 2px black;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" style="width: 100%; max-width: 600px; margin-top: 50px;"></div>
+
+    <script>
+        const adhkar = [
+            { text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير", limit: 100 },
+            { text: "أستغفر الله وأتوب إليه", limit: 300 },
+            { text: "اللهم صل وسلم على نبينا محمد", limit: 100 },
+            { text: "الله أكبر الله أكبر الله أكبر ولله الحمد", limit: 999 },
+            { text: "سبحان الله وبحمده", limit: 100 },
+            { text: "اللهم إنك عفو تحب العفو فاعف عني", limit: 1 }
+        ];
+
+        const app = document.getElementById('app');
+        adhkar.forEach((item, index) => {
+            let count = item.limit;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="text-part">${item.text}</div>
+                <div class="count-part" id="c${index}">${count}</div>
+            `;
+            card.onclick = () => {
+                if(count > 0) {
+                    count--;
+                    document.getElementById(`c${index}`).innerText = count;
+                }
+            };
+            app.appendChild(card);
+        });
+    </script>
+</body>
+</html>
